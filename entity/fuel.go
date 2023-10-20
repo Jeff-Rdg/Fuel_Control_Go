@@ -2,7 +2,6 @@ package entity
 
 import (
 	"errors"
-	"fmt"
 	"github.com/google/uuid"
 	"regexp"
 	"time"
@@ -23,9 +22,9 @@ type Fuel struct {
 }
 
 func NewFuel(price float64, quantity float64, invoiceNumber string) (Fuel, error) {
-	err := ValidateNewFuel(price, quantity, invoiceNumber)
+	err := validateNewFuel(price, quantity, invoiceNumber)
 	if err != nil {
-		return Fuel{}, fmt.Errorf("error: %v", err.Error())
+		return Fuel{}, err
 	}
 
 	return Fuel{
@@ -44,7 +43,7 @@ func (fuel Fuel) TotalPrice() float64 {
 	return fuel.price * fuel.quantity
 }
 
-func ValidateNewFuel(price, quantity float64, invoiceNumber string) error {
+func validateNewFuel(price, quantity float64, invoiceNumber string) error {
 	if price <= 0 {
 		return FuelPriceError
 	}
@@ -53,7 +52,7 @@ func ValidateNewFuel(price, quantity float64, invoiceNumber string) error {
 	}
 
 	regex := regexp.MustCompile("^[0-9]+$")
-	if invoiceNumber == "" || !regex.MatchString(invoiceNumber) {
+	if invoiceNumber == "" || !regex.MatchString(invoiceNumber) || len(invoiceNumber) != 6 {
 		return FuelInvoiceNumberError
 	}
 
