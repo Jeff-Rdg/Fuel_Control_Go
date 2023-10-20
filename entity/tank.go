@@ -1,9 +1,7 @@
 package entity
 
-import "github.com/google/uuid"
-
 type Tank struct {
-	ID       uuid.UUID
+	Base
 	Capacity float64
 	Quantity float64
 }
