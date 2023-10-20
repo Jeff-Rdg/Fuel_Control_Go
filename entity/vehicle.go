@@ -9,4 +9,5 @@ type Vehicle struct {
 	Plate    string
 	Odometer int64
 	Type     enum.VehicleType
+	Owner
 }
