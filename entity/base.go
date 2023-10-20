@@ -6,7 +6,7 @@ import (
 )
 
 type Base struct {
-	ID        uuid.UUID
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	id        uuid.UUID
+	createdAt time.Time
+	updatedAt time.Time
 }
