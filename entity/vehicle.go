@@ -10,7 +10,7 @@ import (
 var (
 	VehiclePlateError    = errors.New("invalid plate")
 	VehicleOdometerError = errors.New("invalid odometer")
-	VehicleTypeError     = errors.New("invalid VehicleType")
+	VehicleTypeError     = errors.New("invalid VehicleType, valid types: " + enum.GetVehicleTypes())
 	VehicleOwnerError    = errors.New("invalid Owner")
 )
 
