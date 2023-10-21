@@ -1,5 +1,7 @@
 package enum
 
+import "strings"
+
 type VehicleType string
 
 const (
@@ -14,4 +16,23 @@ func ValidVehicleType(value string) bool {
 		return true
 	}
 	return false
+}
+
+func (tp VehicleType) ToString() string {
+	switch tp {
+	case CAR:
+		return "CAR"
+	case TRUCK:
+		return "TRUCK"
+	case PICKUP:
+		return "PICKUP"
+	default:
+		return ""
+	}
+}
+
+func GetVehicleTypes() string {
+	types := []string{CAR.ToString(), TRUCK.ToString(), PICKUP.ToString()}
+	result := strings.Join(types, ", ")
+	return result
 }
