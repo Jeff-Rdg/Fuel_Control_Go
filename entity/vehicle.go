@@ -6,8 +6,8 @@ import (
 
 type Vehicle struct {
 	Base
-	Plate    string
-	Odometer int64
-	Type     enum.VehicleType
+	plate       string
+	odometer    int64
+	vehicleType enum.VehicleType
 	Owner
 }
