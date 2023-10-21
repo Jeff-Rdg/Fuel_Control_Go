@@ -12,6 +12,7 @@ var (
 	OwnerCnpjError           = errors.New("invalid cnpj")
 	OwnerCoorporateNameError = errors.New("invalid coorporate name")
 	OwnerEmailError          = errors.New("invalid email")
+	OnlyDecimal              = `[^\d]`
 )
 
 type Owner struct {
@@ -26,6 +27,7 @@ func NewOwner(cnpj, coorporateName, email string) (Owner, error) {
 	if err != nil {
 		return Owner{}, err
 	}
+	formattedCnpj := formatFields(cnpj, OnlyDecimal)
 
 	return Owner{
 		Base: Base{
@@ -33,7 +35,7 @@ func NewOwner(cnpj, coorporateName, email string) (Owner, error) {
 			createdAt: time.Now(),
 			updatedAt: time.Now(),
 		},
-		cnpj:           cnpj,
+		cnpj:           formattedCnpj,
 		coorporateName: coorporateName,
 		email:          email,
 	}, nil
@@ -53,7 +55,7 @@ func validateOwner(cnpj, coorporateName, email string) error {
 }
 
 func validateCnpj(cnpj string) bool {
-	re := regexp.MustCompile(`[^\d]`)
+	re := regexp.MustCompile(OnlyDecimal)
 	cnpj = re.ReplaceAllString(cnpj, "")
 
 	if len(cnpj) != 14 {
@@ -102,4 +104,9 @@ func validateCnpj(cnpj string) bool {
 	}
 
 	return true
+}
+
+func formatFields(input, pattern string) string {
+	re := regexp.MustCompile(pattern)
+	return re.ReplaceAllString(input, "")
 }
