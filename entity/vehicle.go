@@ -47,7 +47,7 @@ func validateVehicle(plate string, odometer int, vehicleType string, owner Owner
 	if odometer == 0 {
 		return VehicleOdometerError
 	}
-	if enum.ValidVehicleType(vehicleType) {
+	if !enum.ValidVehicleType(vehicleType) {
 		return VehicleTypeError
 	}
 
