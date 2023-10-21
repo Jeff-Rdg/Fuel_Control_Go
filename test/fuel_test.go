@@ -52,14 +52,14 @@ func TestFuel_NewFuel(t *testing.T) {
 			expectedErr:   entity.FuelInvoiceNumberError,
 		},
 		{
-			testName:      "invoiceNumber with 7 characters",
+			testName:      "invoiceNumber with seven characters",
 			price:         5.0,
 			quantity:      1.0,
 			invoiceNumber: "1234567",
 			expectedErr:   entity.FuelInvoiceNumberError,
 		},
 		{
-			testName:      "invoiceNumber with 0 characters",
+			testName:      "invoiceNumber with zero characters",
 			price:         5.0,
 			quantity:      1.0,
 			invoiceNumber: "",
