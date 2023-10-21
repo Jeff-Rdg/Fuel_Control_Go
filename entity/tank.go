@@ -2,6 +2,6 @@ package entity
 
 type Tank struct {
 	Base
-	Capacity float64
-	Quantity float64
+	capacity float64
+	quantity float64
 }
