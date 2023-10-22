@@ -6,9 +6,9 @@ import (
 )
 
 type VehicleTank struct {
-	FromTank      uuid.UUID
-	ToVehicle     uuid.UUID
-	Quantity      float64
-	Odometer      float64
-	ProvisionDate time.Time
+	fromTank   uuid.UUID
+	toVehicle  uuid.UUID
+	quantity   float64
+	odometer   float64
+	supplyDate time.Time
 }
