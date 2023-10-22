@@ -77,7 +77,7 @@ func TestTank_Refuel(t *testing.T) {
 			tank:        tank,
 			fuel:        fuel,
 			date:        time.Now().AddDate(0, 0, 1),
-			expectedErr: entity.TankRefuelDateError,
+			expectedErr: entity.RefuelDateError,
 		},
 	}
 
@@ -97,7 +97,7 @@ func TestTank_Refuel(t *testing.T) {
 			tank:        tank,
 			fuel:        fuel,
 			date:        time.Now(),
-			expectedErr: entity.TankRefuelQuantityError,
+			expectedErr: entity.RefuelQuantityError,
 		},
 	}
 

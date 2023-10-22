@@ -20,6 +20,7 @@ type Vehicle struct {
 	odometer    int
 	vehicleType enum.VehicleType
 	Owner
+	history []VehicleTank
 }
 
 func NewVehicle(plate string, odometer int, vehicleType string, owner Owner) (Vehicle, error) {
@@ -44,7 +45,7 @@ func validateVehicle(plate string, odometer int, vehicleType string, owner Owner
 	if plate == "" {
 		return VehiclePlateError
 	}
-	if odometer == 0 {
+	if odometer < 0 {
 		return VehicleOdometerError
 	}
 	if !enum.ValidVehicleType(vehicleType) {
@@ -54,5 +55,20 @@ func validateVehicle(plate string, odometer int, vehicleType string, owner Owner
 	if (Owner{} == owner) {
 		return VehicleOwnerError
 	}
+	return nil
+}
+
+func (vehicle *Vehicle) Refuel(tank *Tank, quantity float64, date time.Time) error {
+	if date.After(time.Now()) {
+		return RefuelDateError
+	}
+	vehicleTank, err := NewVehicleTank(tank.id, vehicle.id, quantity, vehicle.odometer, date)
+	if err != nil {
+		return err
+	}
+
+	tank.quantity -= quantity
+	vehicle.history = append(vehicle.history, vehicleTank)
+
 	return nil
 }

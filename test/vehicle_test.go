@@ -38,7 +38,7 @@ func TestVehicle_NewVehicle(t *testing.T) {
 		{
 			testName:    "Invalid odometer",
 			plate:       "MVJ7605",
-			odometer:    0,
+			odometer:    -59,
 			vehicleType: "TRUCK",
 			owner:       validOwner,
 			expectedErr: entity.VehicleOdometerError,

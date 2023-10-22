@@ -7,9 +7,9 @@ import (
 )
 
 var (
-	TankCapacityError       = errors.New("invalid tank capacity, value must be between 0 and 2000")
-	TankRefuelDateError     = errors.New("invalid date to refuel")
-	TankRefuelQuantityError = errors.New("quantity in the tank plus the amount of supply exceeds tank capacity")
+	TankCapacityError   = errors.New("invalid tank capacity, value must be between 0 and 2000")
+	RefuelDateError     = errors.New("invalid date to refuel")
+	RefuelQuantityError = errors.New("quantity in the tank plus the amount of supply exceeds tank capacity")
 )
 
 type Tank struct {
@@ -46,10 +46,10 @@ func (tank *Tank) Refuel(fuel Fuel, date time.Time) error {
 		return TankCapacityError
 	}
 	if tank.quantity+fuel.quantity > tank.capacity {
-		return TankRefuelQuantityError
+		return RefuelQuantityError
 	}
 	if date.After(time.Now()) {
-		return TankRefuelDateError
+		return RefuelDateError
 	}
 	fuelTank, err := NewFuelTank(fuel.id, tank.id, fuel.quantity, date)
 	if err != nil {
