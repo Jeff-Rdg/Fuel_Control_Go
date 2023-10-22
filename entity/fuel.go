@@ -47,7 +47,7 @@ func validateNewFuel(price, quantity float64, invoiceNumber string) error {
 	if price <= 0 {
 		return FuelPriceError
 	}
-	if quantity <= 0 {
+	if quantity <= 0 || quantity > 2000 {
 		return FuelQuantityError
 	}
 
@@ -57,4 +57,28 @@ func validateNewFuel(price, quantity float64, invoiceNumber string) error {
 	}
 
 	return nil
+}
+
+func (fuel *Fuel) GetId() uuid.UUID {
+	return fuel.id
+}
+
+func (fuel *Fuel) GetPrice() float64 {
+	return fuel.price
+}
+
+func (fuel *Fuel) SetPrice(value float64) {
+	if fuel.price != value && value > 0 {
+		fuel.price = value
+	}
+}
+
+func (fuel *Fuel) GetQuantity() float64 {
+	return fuel.quantity
+}
+
+func (fuel *Fuel) SetQuantity(value float64) {
+	if fuel.quantity != value && value > 0 && value <= 2000 {
+		fuel.quantity = value
+	}
 }
